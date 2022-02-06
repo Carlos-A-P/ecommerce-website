@@ -1,28 +1,37 @@
 import express from "express";
+import cors from "cors";
+import * as dotenv from "dotenv";
+import { Product } from "./db/db";
+import { errorHandler } from "./services/errorHandler";
 
-const PORT = 3022;
+dotenv.config();
+
+const PORT = process.env.PORT;
 const app = express();
+app.use(express.json());
+app.use(cors());
 
-const items = [
-  {
-    id: 1,
-    name: "Plain Shirt",
-    cagetory: "Apparel",
-  },
-  {
-    id: 2,
-    name: "Computer",
-    cagetory: "Electronics",
-  },
-  {
-    id: 3,
-    name: "Mango",
-    cagetory: "Food",
-  },
-];
+app.get("/store/products", (request, response) => {
+  Product.find()
+    .then(products => {
+      if (products && products.length) response.json(products);
+      else response.status(404).end();
+    })
+    .catch(error => {
+      errorHandler(error, response);
+    });
+});
 
-app.get("/items", (request, response) => {
-  response.json(items);
+app.get("/store/product/:id", (request, response) => {
+  const id = request.params.id;
+  Product.findById(id)
+    .then(product => {
+      if (product) response.json(product);
+      else response.status(404).end();
+    })
+    .catch(error => {
+      errorHandler(error, response);
+    });
 });
 
 app.listen(PORT, () => {

@@ -14,11 +14,12 @@ mongoose.connect(url);
 
 const productSchema = new mongoose.Schema({
   name: String,
-  company: String,
+  brand: String,
   price: Number,
-  department: Number,
-  stock: Number,
+  sex: String,
+  sizes: [{ size: String, stock: Number }],
   description: String,
+  details: [String],
 });
 
 productSchema.set("toJSON", {

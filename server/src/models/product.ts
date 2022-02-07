@@ -1,9 +1,15 @@
-export interface Product {
-  id: string;
+export interface ProductObject {
+  id: number;
   name: string;
-  company: string;
+  brand: string;
   price: number;
-  department: number;
-  stock: number;
+  sex: number;
+  sizes: sizesInterface[];
   description: string;
+  details: string[];
+}
+
+interface sizesInterface {
+  size: string;
+  stock: number;
 }

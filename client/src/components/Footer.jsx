@@ -25,16 +25,17 @@ export default function Footer() {
 		<FooterAtt>
 			<div className="attribution">
 				Coded by{" "}
-				<Link
-					to={{ pathname: "https://carlospwd.netlify.app/" }}
+				<a
+					href="https://carlospwd.netlify.app/"
 					target="_blank"
+					rel="noreferrer"
 				>
 					Carlos Perez
-				</Link>{" "}
+				</a>{" "}
 				and{" "}
-				<Link to={{ pathname: "/" }} target="_blank">
+				<a href="/" target="_blank" rel="noreferrer">
 					Pedro Angeles Flores
-				</Link>
+				</a>
 				.
 			</div>
 		</FooterAtt>

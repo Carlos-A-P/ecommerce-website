@@ -12,7 +12,7 @@ function App() {
 				<Navbar />
 				<Routes>
 					<Route path="/" exact element={<Collections />} />
-					<Route path="/Hero" exact element={<Hero />} />
+					<Route path="/Hero" element={<Hero />} />
 				</Routes>
 				<Footer />
 			</Router>

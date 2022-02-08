@@ -5,17 +5,25 @@ export default function Collections() {
 	const [products, setProducts] = useState([]);
 	useEffect(() => {
 		const fetchData = async () => {
-			const { data } = await axios.get("/store/product");
-			setProducts(data);
+			try {
+				const response = await axios.get("http://localhost:3022/store/product");
+				if (response && response.data) {
+					setProducts(response.data);
+				}
+			} catch (err) {
+				// Not in 200 response range
+				if (err.response) {
+					console.log(err.response.data);
+					console.log(err.response.status);
+					console.log(err.response.headers);
+				} else {
+					console.log(`Error: ${err.message}`);
+				}
+			}
 		};
 		fetchData();
 	}, []);
 
-	// const displayFetch = () => {
-	// 	fetch("/store/product/")
-	// 		.then((response) => response.json())
-	// 		.then((json) => console.log(json));
-	// };
 	return (
 		<div>
 			<h1>Collection Page</h1>

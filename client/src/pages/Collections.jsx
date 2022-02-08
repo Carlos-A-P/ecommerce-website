@@ -9,7 +9,6 @@ export default function Collections() {
 			setProducts(data);
 		};
 		fetchData();
-		console.log(products);
 	}, []);
 
 	// const displayFetch = () => {

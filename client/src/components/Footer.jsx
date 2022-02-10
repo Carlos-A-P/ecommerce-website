@@ -24,19 +24,7 @@ export default function Footer() {
 	return (
 		<FooterAtt>
 			<div className="attribution">
-				Coded by{" "}
-				<a
-					href="https://carlospwd.netlify.app/"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Carlos Perez
-				</a>{" "}
-				and{" "}
-				<a href="/" target="_blank" rel="noreferrer">
-					Pedro Angeles Flores
-				</a>
-				.
+				<p>Footer</p>
 			</div>
 		</FooterAtt>
 	);

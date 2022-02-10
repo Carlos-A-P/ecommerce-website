@@ -35,11 +35,11 @@ export default function Navbar() {
 								<img src={Close} alt="close navbar" />
 							</button>
 							<div>
-								<Link to="/">Collections</Link>
-								<Link to="/">Men</Link>
-								<Link to="/">Women</Link>
-								<Link to="/">About</Link>
-								<Link to="/">Contact</Link>
+								<Link to="collections">Collections</Link>
+								<Link to="men">Men</Link>
+								<Link to="women">Women</Link>
+								<Link to="about">About</Link>
+								<Link to="contact">Contact</Link>
 							</div>
 						</div>
 						<div className="mobile-bg" onClick={toggleNavbar}></div>

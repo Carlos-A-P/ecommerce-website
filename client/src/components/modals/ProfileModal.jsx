@@ -11,6 +11,7 @@ const ProfileModal = React.forwardRef((props, profileRef) => {
 					<Link to="/">Profile</Link>
 					<Link to="/">Settings</Link>
 					<Link to="/">Purchase History</Link>
+					<Link to="add_item">Add Item</Link>
 				</div>
 				<button className="log-out">Log-out</button>
 			</div>

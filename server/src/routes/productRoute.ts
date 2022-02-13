@@ -1,7 +1,8 @@
 import { Product } from "../db/db";
 import { errorHandler } from "../services/errorHandler";
 import { Router } from "express";
-import { ProductObject } from "src/models/product";
+import { ProductObject } from "../models/product";
+import { areFieldsMissing } from "../services/productService";
 
 const FILE_NAME = "productController";
 
@@ -44,7 +45,16 @@ productRoute.post("/", (request, response) => {
   const product: ProductObject = request.body;
   if (!product) return response.status(400);
   console.log(`[${FILE_NAME}] - POST Request received. New product added`);
-  console.log(product);
+  if (areFieldsMissing(product)) {
+    errorHandler(
+      {
+        name: "Missing fields",
+        message: "One or more fields are missing from the product.",
+      },
+      response
+    );
+    return;
+  }
   const newProduct = new Product({
     name: product.name,
     brand: product.brand,
@@ -53,6 +63,7 @@ productRoute.post("/", (request, response) => {
     sizes: product.sizes,
     description: product.description,
     details: product.details,
+    images: product.images,
   });
   newProduct
     .save()
@@ -65,7 +76,7 @@ productRoute.post("/", (request, response) => {
 productRoute.put("/", (request, response) => {
   const id = request.body.id;
   const product: ProductObject = request.body.product;
-  if (id === undefined || !product) return response.status(400);
+  if (!id || !product) return response.status(400);
   console.log(`[${FILE_NAME}] - PUT Request received. Updating id ${id} with value ${product}`);
   Product.findByIdAndUpdate(id, product)
     .then(response => {
@@ -74,6 +85,8 @@ productRoute.put("/", (request, response) => {
     .catch(error => errorHandler(error, response));
 });
 
-productRoute.delete("/");
+productRoute.delete("/", (request, response) => {
+  response.status(200).send({ message: "Function not implemented yet" });
+});
 
 export { productRoute };

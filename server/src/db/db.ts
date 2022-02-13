@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
+import { transformProductReturned } from "../services/dbService";
 
 dotenv.config();
 
@@ -20,16 +21,46 @@ const productSchema = new mongoose.Schema({
   sizes: [{ size: String, stock: Number }],
   description: String,
   details: [String],
+  images: [String],
 });
 
 productSchema.set("toJSON", {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
+    transformProductReturned(returnedObject);
   },
 });
 
 const Product = mongoose.model("Product", productSchema);
 
-export { Product };
+const userSchema = new mongoose.Schema({
+  firstName: String,
+  lastName: String,
+  username: String,
+  email: String,
+  phone: String,
+  password: String,
+});
+
+userSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    transformProductReturned(returnedObject);
+  },
+});
+
+const User = mongoose.model("User", userSchema);
+
+const cartSchema = new mongoose.Schema({
+  productInfo: [{ productId: mongoose.Types.ObjectId, quantity: Number }],
+  userId: mongoose.Types.ObjectId,
+  totalPrice: Number,
+});
+
+cartSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    transformProductReturned(returnedObject);
+  },
+});
+
+const Cart = mongoose.model("Cart", cartSchema);
+
+export { Product, User, Cart };

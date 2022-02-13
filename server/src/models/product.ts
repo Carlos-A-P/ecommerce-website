@@ -1,5 +1,5 @@
 export interface ProductObject {
-  id: number;
+  id: string;
   name: string;
   brand: string;
   price: number;
@@ -7,6 +7,7 @@ export interface ProductObject {
   sizes: sizesInterface[];
   description: string;
   details: string[];
+  images: string[];
 }
 
 interface sizesInterface {

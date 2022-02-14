@@ -3,7 +3,7 @@ export interface ProductObject {
   name: string;
   brand: string;
   price: number;
-  sex: number;
+  sex: string;
   sizes: sizesInterface[];
   description: string;
   details: string[];

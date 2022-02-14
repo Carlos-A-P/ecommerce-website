@@ -34,7 +34,28 @@ productRoute.get("/search/:name", (request, response) => {
   console.log(`[${FILE_NAME}] - GET Request received. Searching for ${name}`);
   Product.find({ name: { $regex: name, $options: "i" } })
     .then(products => {
-      console.log(products);
+      if (products) response.json(products);
+      else response.status(404).end();
+    })
+    .catch(error => errorHandler(error, response));
+});
+
+productRoute.get("/price-range/:min/:max", (request, response) => {
+  const { min, max } = request.params;
+  console.log(`[${FILE_NAME}] - GET Request received. Searching for price ranges ${min} - ${max}.`);
+  Product.find({ price: { $gte: min, $lte: max } })
+    .then(products => {
+      if (products) response.json(products);
+      else response.status(404).end();
+    })
+    .catch(error => errorHandler(error, response));
+});
+
+productRoute.get("/sex/:sex", (request, response) => {
+  const sex = request.params.sex;
+  console.log(`[${FILE_NAME}] - GET Request received. Searching for ${sex} items.`);
+  Product.find({ sex })
+    .then(products => {
       if (products) response.json(products);
       else response.status(404).end();
     })
@@ -85,8 +106,13 @@ productRoute.put("/", (request, response) => {
     .catch(error => errorHandler(error, response));
 });
 
-productRoute.delete("/", (request, response) => {
-  response.status(200).send({ message: "Function not implemented yet" });
+productRoute.delete("/:id", (request, response) => {
+  const id = request.params.id;
+  Product.deleteOne({ id })
+    .then(() => {
+      response.status(200).send({ message: "Delete succesful" });
+    })
+    .catch(error => errorHandler(error, response));
 });
 
 export { productRoute };

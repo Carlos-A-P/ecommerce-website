@@ -27,9 +27,12 @@ export default function Navbar() {
 						>
 							<img className="hamburger" src={Hamburger} alt="open menu" />
 						</button>
-						<Link className="logo" to="/">
+						<p className="logo">
+							<Link to="/">WebDev Apparel</Link>
+						</p>
+						{/* <Link className="logo" to="/">
 							<img src={Logo} alt="logo" />
-						</Link>
+						</Link> */}
 						<div id="links">
 							<button className="closeNav" onClick={toggleNavbar}>
 								<img src={Close} alt="close navbar" />

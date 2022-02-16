@@ -12,6 +12,18 @@
 	margin-right: 16px;
 }
 
+p.logo {
+	display: inline;
+}
+
+p.logo a {
+	text-decoration: none;
+	color: black;
+	font-size: clamp(0.7rem, calc(2vw+5px), 1.3rem);
+	font-weight: 900;
+	font-family: "Kumbh Sans", sans-serif;
+}
+
 .left-side button[aria-expanded="false"] ~ div#links {
 	transform: translateX(-100%);
 	overflow: hidden;
